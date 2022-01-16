@@ -1,8 +1,10 @@
 import ProductsModel from "./ProductsModel.js";
+import FileService from "../service/FileService.js";
 
 class ProductsService {
-    async create(product) {
-        return await ProductsModel.create(product);
+    async create(product, image) {
+        const imageName = FileService.save(image, "products");
+        return await ProductsModel.create({ ...product, image: imageName });
     }
 
     async getAll() {

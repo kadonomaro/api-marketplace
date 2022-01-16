@@ -3,7 +3,10 @@ import ReviewsService from "./ReviewsService.js";
 class ReviewsController {
     async create(req, res) {
         try {
-            const review = await ReviewsService.create(req.body);
+            const review = await ReviewsService.create(
+                req.body,
+                req.files.image
+            );
             res.json(review);
         } catch (e) {
             res.status(500).json(e);
@@ -29,7 +32,7 @@ class ReviewsController {
     }
     async delete(req, res) {
         try {
-            const review = await ReviewsService.create(req.params.id);
+            const review = await ReviewsService.delete(req.params.id);
             return res.json(review);
         } catch (e) {
             res.status(500).json(e);

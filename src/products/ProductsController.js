@@ -3,7 +3,10 @@ import ProductsService from "./ProductsService.js";
 class ProductsController {
     async create(req, res) {
         try {
-            const product = await ProductsService.create(req.body);
+            const product = await ProductsService.create(
+                req.body,
+                req.files.image
+            );
             res.json(product);
         } catch (e) {
             res.status(500).json(e);
@@ -36,7 +39,7 @@ class ProductsController {
     }
     async delete(req, res) {
         try {
-            const product = await ProductsService.create(req.params.id);
+            const product = await ProductsService.delete(req.params.id);
             return res.json(product);
         } catch (e) {
             res.status(500).json(e);

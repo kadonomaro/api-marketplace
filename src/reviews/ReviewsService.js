@@ -1,8 +1,10 @@
 import ReviewsModel from "./ReviewsModel.js";
+import FileService from "../service/FileService.js";
 
 class ReviewsService {
-    async create(review) {
-        return await ReviewsModel.create(review);
+    async create(review, image) {
+        const imageName = FileService.save(image, "reviews");
+        return await ReviewsModel.create({ ...review, image: imageName });
     }
 
     async getAll() {

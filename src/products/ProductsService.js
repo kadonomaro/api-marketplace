@@ -20,14 +20,14 @@ class ProductsService {
         if (!product._id) {
             throw new Error("Не указан идентификатор товара");
         }
-        return await Post.findByIdAndUpdate(post._id, product, {
+        return await ProductsModel.findByIdAndUpdate(product._id, product, {
             new: true,
         });
     }
 
     async delete(id) {
         if (!id) {
-            throw new Error("не указан ID");
+            throw new Error("Не указан идентификатор отзыва");
         }
         return await ProductsModel.findByIdAndDelete(id);
     }

@@ -1,4 +1,4 @@
-import ReviewsService from "./ReviewsService.js";
+import ReviewsService from "../services/ReviewsService.js";
 
 class ReviewsController {
     async create(req, res) {

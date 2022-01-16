@@ -7,11 +7,11 @@ const fileExtension = {
 };
 
 class FileService {
-    save(file, entity) {
+    save(file, entityName) {
         try {
             const fileName =
                 uuid.v4() + (fileExtension[file.mimetype] || ".jpg");
-            const filePath = path.resolve(`static/${entity}`, fileName);
+            const filePath = path.resolve(`static/${entityName}`, fileName);
             file.mv(filePath);
             return fileName;
         } catch (e) {

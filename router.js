@@ -4,15 +4,15 @@ import ReviewsController from "./src/controllers/ReviewsController.js";
 
 const router = new Router();
 
-router.post("/products", ProductsController.create);
-router.get("/products", ProductsController.getAll);
-router.get("/products/:id", ProductsController.getOne);
-router.put("/products", ProductsController.update);
-router.delete("/products/:id", ProductsController.delete);
+router.post("/products", (...args) => ProductsController.create(...args));
+router.get("/products", (...args) => ProductsController.getAll(...args));
+router.get("/products/:id", (...args) => ProductsController.getOne(...args));
+router.put("/products", (...args) => ProductsController.update(...args));
+router.delete("/products/:id", (...args) => ProductsController.delete(...args));
 
-router.post("/reviews", ReviewsController.create);
-router.get("/reviews", ReviewsController.getAll);
-router.put("/reviews", ReviewsController.update);
-router.delete("/reviews/:id", ReviewsController.delete);
+router.post("/reviews", (...args) => ReviewsController.create(...args));
+router.get("/reviews", (...args) => ReviewsController.getAll(...args));
+router.put("/reviews", (...args) => ReviewsController.update(...args));
+router.delete("/reviews/:id", (...args) => ReviewsController.delete(...args));
 
 export default router;

@@ -1,50 +1,10 @@
 import ProductsService from "../services/ProductsService.js";
+import BaseController from "./BaseController.js";
 
-class ProductsController {
-    async create(req, res) {
-        try {
-            const product = await ProductsService.create(
-                req.body,
-                req.files.image
-            );
-            res.json(product);
-        } catch (e) {
-            res.status(500).json(e);
-        }
-    }
-
-    async getAll(req, res) {
-        try {
-            const products = await ProductsService.getAll();
-            return res.json(products);
-        } catch (e) {
-            res.status(500).json(e);
-        }
-    }
-    async getOne(req, res) {
-        try {
-            const product = await ProductsService.getOne(req.params.id);
-            return res.json(product);
-        } catch (e) {
-            res.status(500).json(e);
-        }
-    }
-    async update(req, res) {
-        try {
-            const updatedProduct = await ProductsService.update(req.body);
-            return res.json(updatedProduct);
-        } catch (e) {
-            res.status(500).json(e.message);
-        }
-    }
-    async delete(req, res) {
-        try {
-            const product = await ProductsService.delete(req.params.id);
-            return res.json(product);
-        } catch (e) {
-            res.status(500).json(e);
-        }
+class ProductsController extends BaseController {
+    constructor(service) {
+        super(service);
     }
 }
 
-export default new ProductsController();
+export default new ProductsController(ProductsService);

@@ -1,9 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import fileUpload from "express-fileupload";
-import router from "./router.js";
 import dotenv from "dotenv";
 dotenv.config();
+
+import { articlesRouter } from "./src/routes/ArticlesRoutes.js";
+import { productsRouter } from "./src/routes/ProductsRoutes.js";
+import { reviewsRouter } from "./src/routes/ReviewsRoutes.js";
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -11,7 +14,10 @@ const app = express();
 app.use(express.json());
 app.use(express.static("static"));
 app.use(fileUpload({}));
-app.use("/api", router);
+
+app.use("/api", articlesRouter);
+app.use("/api", productsRouter);
+app.use("/api", reviewsRouter);
 
 async function start() {
     try {

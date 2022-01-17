@@ -18,7 +18,7 @@ export default class BaseService {
     }
 
     /**
-     * Get all entities
+     * Get all entities from database
      * @return {Promise<*>}
      */
     async getAll() {
@@ -26,7 +26,7 @@ export default class BaseService {
     }
 
     /**
-     * Get entity by id
+     * Get entity from database by id
      * @param { String, Number } id
      * @return {Promise<Query<any, any, {}, any>>}
      */
@@ -38,7 +38,7 @@ export default class BaseService {
     }
 
     /**
-     * Update entity
+     * Update entity in database
      * @param { Object } entity
      * @return {Promise<*>}
      */
@@ -52,7 +52,7 @@ export default class BaseService {
     }
 
     /**
-     * Delete entity by id
+     * Delete entity from database by id
      * @param { String, Number } id
      * @return {Promise<awaited Query<any, any, {}, any> | Query<any, any, {}, DocType>>}
      */
@@ -60,6 +60,8 @@ export default class BaseService {
         if (!id) {
             throw new Error(`Не указан идентификатор для [${this.entityName}]`);
         }
-        return await this.model.findByIdAndDelete(id);
+        const model = await this.model.findByIdAndDelete(id);
+        FileService.remove(model.image, this.entityName);
+        return model;
     }
 }

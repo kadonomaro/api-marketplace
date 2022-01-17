@@ -3,6 +3,12 @@ export default class BaseController {
         this.service = service;
     }
 
+    /**
+     * Create entity in service
+     * @param { Request } req
+     * @param { Response } res
+     * @return {Promise<void>}
+     */
     async create(req, res) {
         try {
             const entity = await this.service.create(req.body, req.files.image);
@@ -12,6 +18,12 @@ export default class BaseController {
         }
     }
 
+    /**
+     * Get all entities from service
+     * @param { Request } req
+     * @param { Response } res
+     * @return {Promise<*>}
+     */
     async getAll(req, res) {
         try {
             const entities = await this.service.getAll();
@@ -21,6 +33,12 @@ export default class BaseController {
         }
     }
 
+    /**
+     * Get entity from service
+     * @param { Request } req
+     * @param { Response } res
+     * @return {Promise<*>}
+     */
     async getOne(req, res) {
         try {
             const entity = await this.service.getOne(req.params.id);
@@ -30,6 +48,12 @@ export default class BaseController {
         }
     }
 
+    /**
+     * Update entity in service
+     * @param { Request } req
+     * @param { Response } res
+     * @return {Promise<*>}
+     */
     async update(req, res) {
         try {
             const updatedEntity = await this.service.update(req.body);
@@ -39,6 +63,12 @@ export default class BaseController {
         }
     }
 
+    /**
+     * Delete entity in service
+     * @param { Request } req
+     * @param { Response } res
+     * @return {Promise<*>}
+     */
     async delete(req, res) {
         try {
             const entity = await this.service.delete(req.params.id);

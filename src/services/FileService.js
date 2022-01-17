@@ -1,5 +1,6 @@
 import * as uuid from "uuid";
 import * as path from "path";
+import fs from "fs";
 
 const fileExtension = {
     "image/jpeg": ".jpg",
@@ -14,6 +15,17 @@ class FileService {
             const filePath = path.resolve(`static/${entityName}`, fileName);
             file.mv(filePath);
             return fileName;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    remove(fileName, entityName) {
+        try {
+            const filePath = path.resolve(`static/${entityName}`, fileName);
+            fs.unlink(filePath, (message) => {
+                console.log(message);
+            });
         } catch (e) {
             console.log(e);
         }

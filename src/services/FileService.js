@@ -8,6 +8,12 @@ const fileExtension = {
 };
 
 class FileService {
+    /**
+     * Save file to static directory
+     * @param { File } file
+     * @param { String } entityName
+     * @return {*}
+     */
     save(file, entityName) {
         try {
             const fileName =
@@ -20,6 +26,11 @@ class FileService {
         }
     }
 
+    /**
+     * Remove file from static directory
+     * @param { String } fileName
+     * @param { String } entityName
+     */
     remove(fileName, entityName) {
         try {
             const filePath = path.resolve(`static/${entityName}`, fileName);

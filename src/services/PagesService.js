@@ -38,16 +38,14 @@ class PagesService {
 
     /**
      * Delete page entity by id
-     * @param { Object } page
+     * @param { String, Number } id
      * @return {Promise<Query<any, any, {}, any>>}
      */
-    async delete(page) {
-        if (!page._id) {
+    async delete(id) {
+        if (!id) {
             throw new Error(`Не указан идентификатор для [page]`);
         }
-        return await PagesModel.findByIdAndDelete(page._id, page, {
-            new: true,
-        });
+        return await PagesModel.findByIdAndDelete(id);
     }
 }
 

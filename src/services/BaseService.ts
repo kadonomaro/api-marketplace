@@ -1,7 +1,11 @@
-import FileService from "./FileService.js";
+import FileService from "./FileService";
+import { models } from "mongoose";
 
 export default class BaseService {
-    constructor({ model, entityName }) {
+    private model;
+    private entityName;
+
+    constructor({ model, entityName }: { model: any; entityName: string }) {
         this.model = model;
         this.entityName = entityName;
     }
@@ -12,7 +16,7 @@ export default class BaseService {
      * @param { Object } image
      * @return {Promise<*>}
      */
-    async create(entity, image) {
+    async create(entity: object, image: string) {
         const imageName = FileService.save(image, this.entityName);
         return await this.model.create({ ...entity, image: imageName });
     }
@@ -30,7 +34,7 @@ export default class BaseService {
      * @param { String, Number } id
      * @return {Promise<Query<any, any, {}, any>>}
      */
-    async getOne(id) {
+    async getOne(id: string | number) {
         if (!id) {
             throw new Error(`Не указан идентификатор для [${this.entityName}]`);
         }
@@ -42,7 +46,7 @@ export default class BaseService {
      * @param { Object } entity
      * @return {Promise<*>}
      */
-    async update(entity) {
+    async update(entity: any) {
         if (!entity._id) {
             throw new Error(`Не указан идентификатор для [${this.entityName}]`);
         }
@@ -56,7 +60,7 @@ export default class BaseService {
      * @param { String, Number } id
      * @return {Promise<awaited Query<any, any, {}, any> | Query<any, any, {}, DocType>>}
      */
-    async delete(id) {
+    async delete(id: string | number) {
         if (!id) {
             throw new Error(`Не указан идентификатор для [${this.entityName}]`);
         }

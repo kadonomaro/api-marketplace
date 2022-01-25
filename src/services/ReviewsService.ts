@@ -1,8 +1,8 @@
-import ReviewsModel from "../models/ReviewsModel.js";
-import BaseService from "./BaseService.js";
+import ReviewsModel from "../models/ReviewsModel";
+import BaseService from "./BaseService";
 
 class ReviewsService extends BaseService {
-    constructor({ model, entityName }) {
+    constructor({ model, entityName }: { model: any; entityName: string }) {
         super({ model, entityName });
     }
 }

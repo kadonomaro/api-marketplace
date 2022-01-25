@@ -1,5 +1,5 @@
-import ProductsModel from "../models/ProductsModel.js";
-import BaseService from "./BaseService.js";
+import ProductsModel from "../models/ProductsModel";
+import BaseService from "./BaseService";
 
 class ProductsService extends BaseService {
     constructor({ model, entityName }) {

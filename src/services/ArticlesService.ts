@@ -1,8 +1,8 @@
-import ArticlesModel from "../models/ArticlesModel.js";
-import BaseService from "./BaseService.js";
+import ArticlesModel from "../models/ArticlesModel";
+import BaseService from "./BaseService";
 
 class ArticlesService extends BaseService {
-    constructor({ model, entityName }) {
+    constructor({ model, entityName }: any) {
         super({ model, entityName });
     }
 }

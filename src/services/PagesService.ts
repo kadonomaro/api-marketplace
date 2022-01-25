@@ -1,4 +1,4 @@
-import PagesModel from "../models/PagesModel.js";
+import PagesModel from "../models/PagesModel";
 
 class PagesService {
     /**

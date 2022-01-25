@@ -11,4 +11,4 @@ const ReviewsModel = new Schema<IReview>(
     { timestamps: true }
 );
 
-export default model("reviews", ReviewsModel);
+export default model<IReview>("reviews", ReviewsModel);

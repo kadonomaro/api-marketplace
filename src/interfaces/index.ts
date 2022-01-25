@@ -1,24 +1,25 @@
-export interface IPageSeo {
+import { Document } from "mongoose";
+
+export interface IPageSeo extends Document {
     title: string;
     description?: string;
 }
 
-export interface IPage {
-    _id?: number | string;
+export interface IPage extends Document {
     slug: string;
     seo: IPageSeo;
     title: string;
     content: string;
 }
 
-export interface IArticle {
+export interface IArticle extends Document {
     title: string;
     description?: string;
     image: string;
     source?: string;
 }
 
-export interface IProduct {
+export interface IProduct extends Document {
     name: string;
     shortName?: string;
     price: number;
@@ -26,7 +27,7 @@ export interface IProduct {
     image: string;
 }
 
-export interface IReview {
+export interface IReview extends Document {
     author: string;
     description: string;
     image: string;

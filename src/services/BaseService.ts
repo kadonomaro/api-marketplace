@@ -5,7 +5,7 @@ export default class BaseService {
     private model;
     private entityName;
 
-    constructor({ model, entityName }: { model: any; entityName: string }) {
+    constructor(model: any, entityName: string) {
         this.model = model;
         this.entityName = entityName;
     }

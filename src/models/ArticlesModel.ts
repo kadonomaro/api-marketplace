@@ -11,4 +11,4 @@ const ArticlesModel = new Schema<IArticle>(
     { timestamps: true }
 );
 
-export default model("articles", ArticlesModel);
+export default model<IArticle>("articles", ArticlesModel);

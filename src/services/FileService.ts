@@ -17,6 +17,7 @@ class FileService {
     save(file: any, entityName: string) {
         try {
             const fileName = uuid.v4() + ".jpg";
+            // const fileName = uuid.v4() + (fileExtension[file.mimetype] || ".jpg");
             const filePath = path.resolve(`static/${entityName}`, fileName);
             file.mv(filePath);
             return fileName;

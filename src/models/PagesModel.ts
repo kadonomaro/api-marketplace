@@ -16,4 +16,4 @@ const PagesModel = new Schema<IPage>(
     { timestamps: true }
 );
 
-export default model("pages", PagesModel);
+export default model<IPage>("pages", PagesModel);

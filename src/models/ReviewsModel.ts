@@ -1,6 +1,13 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const ReviewsModel = new mongoose.Schema(
+interface IReview {
+    author: string;
+    description: string;
+    image: string;
+    source: string;
+}
+
+const ReviewsModel = new Schema<IReview>(
     {
         author: { type: String, required: true },
         description: { type: String, required: true },
@@ -10,4 +17,4 @@ const ReviewsModel = new mongoose.Schema(
     { timestamps: true }
 );
 
-export default mongoose.model("reviews", ReviewsModel);
+export default model("reviews", ReviewsModel);

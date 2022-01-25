@@ -1,5 +1,8 @@
+import { Request, Response } from "express";
+
 export default class BaseController {
-    constructor(service) {
+    private service;
+    constructor(service: any) {
         this.service = service;
     }
 
@@ -9,9 +12,12 @@ export default class BaseController {
      * @param { Response } res
      * @return {Promise<void>}
      */
-    async create(req, res) {
+    async create(req: Request, res: Response) {
         try {
-            const entity = await this.service.create(req.body, req.files.image);
+            const entity = await this.service.create(
+                req.body,
+                req.files!.image
+            );
             res.json(entity);
         } catch (e) {
             res.status(500).json(e);
@@ -24,7 +30,7 @@ export default class BaseController {
      * @param { Response } res
      * @return {Promise<*>}
      */
-    async getAll(req, res) {
+    async getAll(req: Request, res: Response) {
         try {
             const entities = await this.service.getAll();
             return res.json(entities);
@@ -39,7 +45,7 @@ export default class BaseController {
      * @param { Response } res
      * @return {Promise<*>}
      */
-    async getOne(req, res) {
+    async getOne(req: Request, res: Response) {
         try {
             const entity = await this.service.getOne(req.params.id);
             return res.json(entity);
@@ -54,12 +60,12 @@ export default class BaseController {
      * @param { Response } res
      * @return {Promise<*>}
      */
-    async update(req, res) {
+    async update(req: Request, res: Response) {
         try {
             const updatedEntity = await this.service.update(req.body);
             return res.json(updatedEntity);
         } catch (e) {
-            res.status(500).json(e.message);
+            res.status(500).json(e);
         }
     }
 
@@ -69,7 +75,7 @@ export default class BaseController {
      * @param { Response } res
      * @return {Promise<*>}
      */
-    async delete(req, res) {
+    async delete(req: Request, res: Response) {
         try {
             const entity = await this.service.delete(req.params.id);
             return res.json(entity);

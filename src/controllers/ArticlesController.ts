@@ -1,8 +1,8 @@
-import ArticlesService from "../services/ArticlesService.js";
-import BaseController from "./BaseController.js";
+import ArticlesService from "../services/ArticlesService";
+import BaseController from "./BaseController";
 
 class ArticlesController extends BaseController {
-    constructor(service) {
+    constructor(service: any) {
         super(service);
     }
 }

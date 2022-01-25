@@ -1,8 +1,8 @@
-import ReviewsService from "../services/ReviewsService.js";
-import BaseController from "./BaseController.js";
+import ReviewsService from "../services/ReviewsService";
+import BaseController from "./BaseController";
 
 class ReviewsController extends BaseController {
-    constructor(service) {
+    constructor(service: any) {
         super(service);
     }
 }

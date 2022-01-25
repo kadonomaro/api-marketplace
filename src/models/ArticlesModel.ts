@@ -1,11 +1,5 @@
 import { Schema, model } from "mongoose";
-
-interface IArticle {
-    title: string;
-    description?: string;
-    image: string;
-    source?: string;
-}
+import { IArticle } from "../interfaces";
 
 const ArticlesModel = new Schema<IArticle>(
     {

@@ -1,11 +1,5 @@
 import { Schema, model } from "mongoose";
-
-interface IReview {
-    author: string;
-    description: string;
-    image: string;
-    source: string;
-}
+import { IReview } from "../interfaces";
 
 const ReviewsModel = new Schema<IReview>(
     {

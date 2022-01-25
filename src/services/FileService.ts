@@ -2,7 +2,7 @@ import * as uuid from "uuid";
 import * as path from "path";
 import fs from "fs";
 
-const fileExtension = {
+const fileExtension: object = {
     "image/jpeg": ".jpg",
     "image/png": ".png",
 };
@@ -14,10 +14,9 @@ class FileService {
      * @param { String } entityName
      * @return {*}
      */
-    save(file, entityName) {
+    save(file: any, entityName: string) {
         try {
-            const fileName =
-                uuid.v4() + (fileExtension[file.mimetype] || ".jpg");
+            const fileName = uuid.v4() + ".jpg";
             const filePath = path.resolve(`static/${entityName}`, fileName);
             file.mv(filePath);
             return fileName;
@@ -31,7 +30,7 @@ class FileService {
      * @param { String } fileName
      * @param { String } entityName
      */
-    remove(fileName, entityName) {
+    remove(fileName: string, entityName: string) {
         try {
             const filePath = path.resolve(`static/${entityName}`, fileName);
             fs.unlink(filePath, (message) => {

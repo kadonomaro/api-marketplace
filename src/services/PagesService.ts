@@ -1,4 +1,5 @@
 import PagesModel from "../models/PagesModel";
+import { IPage } from "../interfaces";
 
 class PagesService {
     /**
@@ -6,7 +7,7 @@ class PagesService {
      * @param { Object } page
      * @return {Promise<HydratedDocument<any, {}, {}>[]>}
      */
-    async create(page) {
+    async create(page: object): Promise<IPage> {
         return await PagesModel.create(page);
     }
 
@@ -15,7 +16,7 @@ class PagesService {
      * @param { String } slug
      * @return {Promise<Query<any, any, {}, any>>}
      */
-    async getBySlug(slug) {
+    async getBySlug(slug: string): Promise<any> {
         if (!slug) {
             throw new Error(`Не указан "slug" для [page]`);
         }
@@ -27,7 +28,7 @@ class PagesService {
      * @param { Object } page
      * @return {Promise<Query<any, any, {}, any>>}
      */
-    async update(page) {
+    async update(page: IPage): Promise<any> {
         if (!page._id) {
             throw new Error(`Не указан идентификатор для [page]`);
         }
@@ -41,7 +42,7 @@ class PagesService {
      * @param { String, Number } id
      * @return {Promise<Query<any, any, {}, any>>}
      */
-    async delete(id) {
+    async delete(id: string | number): Promise<any> {
         if (!id) {
             throw new Error(`Не указан идентификатор для [page]`);
         }

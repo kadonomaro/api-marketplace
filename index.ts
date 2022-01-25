@@ -1,16 +1,17 @@
 import express from "express";
-import mongoose from "mongoose";
+import { connect } from "mongoose";
 import fileUpload from "express-fileupload";
 import dotenv from "dotenv";
 dotenv.config();
 
-import { articlesRouter } from "./src/routes/ArticlesRoutes.js";
-import { productsRouter } from "./src/routes/ProductsRoutes.js";
-import { reviewsRouter } from "./src/routes/ReviewsRoutes.js";
-import { pagesRouter } from "./src/routes/PagesRoutes.js";
+import { articlesRouter } from "./src/routes/ArticlesRoutes";
+import { productsRouter } from "./src/routes/ProductsRoutes";
+import { reviewsRouter } from "./src/routes/ReviewsRoutes";
+import { pagesRouter } from "./src/routes/PagesRoutes";
 
 const PORT = process.env.PORT || 8000;
 const app = express();
+const URL = process.env.DB_URL || "";
 
 app.use(express.json());
 app.use(express.static("static"));
@@ -21,12 +22,13 @@ app.use("/api", productsRouter);
 app.use("/api", reviewsRouter);
 app.use("/api", pagesRouter);
 
-async function start() {
+async function start(): Promise<void> {
+    const options: object = {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+    };
     try {
-        await mongoose.connect(process.env.DB_URL, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-        });
+        await connect(URL, options);
         app.listen(PORT, () =>
             console.log("Server has been started on port: " + PORT)
         );

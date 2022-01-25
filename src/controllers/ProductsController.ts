@@ -1,8 +1,8 @@
-import ProductsService from "../services/ProductsService.js";
-import BaseController from "./BaseController.js";
+import ProductsService from "../services/ProductsService";
+import BaseController from "./BaseController";
 
 class ProductsController extends BaseController {
-    constructor(service) {
+    constructor(service: any) {
         super(service);
     }
 }

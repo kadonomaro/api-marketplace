@@ -1,8 +1,9 @@
 import ArticlesService from "../services/ArticlesService";
 import BaseController from "./BaseController";
+import BaseService from "../services/BaseService";
 
 class ArticlesController extends BaseController {
-    constructor(service: any) {
+    constructor(service: BaseService) {
         super(service);
     }
 }

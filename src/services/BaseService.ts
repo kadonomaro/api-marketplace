@@ -1,11 +1,12 @@
+import { HydratedDocument } from "mongoose";
+import { UploadedFile } from "express-fileupload";
 import FileService from "./FileService";
-import { models } from "mongoose";
 
 export default class BaseService {
     private model;
     private entityName;
 
-    constructor(model: any, entityName: string) {
+    constructor(model: HydratedDocument<any>, entityName: string) {
         this.model = model;
         this.entityName = entityName;
     }
@@ -16,7 +17,7 @@ export default class BaseService {
      * @param { Object } image
      * @return {Promise<*>}
      */
-    async create(entity: object, image: string) {
+    async create(entity: object, image: UploadedFile | UploadedFile[]) {
         const imageName = FileService.save(image, this.entityName);
         return await this.model.create({ ...entity, image: imageName });
     }

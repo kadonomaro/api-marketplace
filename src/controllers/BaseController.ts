@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
+import BaseService from "../services/BaseService";
 
 export default class BaseController {
     private service;
-    constructor(service: any) {
+    constructor(service: BaseService) {
         this.service = service;
     }
 

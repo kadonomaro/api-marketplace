@@ -8,8 +8,8 @@ export interface IPageSeo extends Document {
 export interface IPage extends Document {
     slug: string;
     seo: IPageSeo;
-    title: string;
-    content: string;
+    title?: string;
+    content?: string;
 }
 
 export interface IArticle extends Document {

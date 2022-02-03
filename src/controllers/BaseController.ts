@@ -15,10 +15,7 @@ export default class BaseController {
      */
     async create(req: Request, res: Response) {
         try {
-            const entity = await this.service.create(
-                req.body,
-                req.files!.image
-            );
+            const entity = await this.service.create(req.body, req.files!.image);
             res.json(entity);
         } catch (e) {
             res.status(500).json(e);

@@ -1,32 +1,33 @@
 {
-  "name": "api-marketplace",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon index.ts",
-    "build": "tsc --project ./"
-  },
-  "author": "Kadonomaro <denis.afer@gmail.com>",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^12.0.3",
-    "express": "^4.17.2",
-    "express-fileupload": "^1.2.1",
-    "express-validator": "^6.14.0",
-    "mongoose": "^6.1.6",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13",
-    "@types/express-fileupload": "^1.2.2",
-    "@types/node": "^17.0.10",
-    "@types/uuid": "^8.3.4",
-    "nodemon": "^2.0.15",
-    "prettier": "^2.5.1",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.5"
-  }
+    "name": "api-marketplace",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon index.ts",
+        "build": "tsc --project ./",
+        "prettier": "prettier --write \"**/*.*\""
+    },
+    "author": "Kadonomaro <denis.afer@gmail.com>",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^12.0.3",
+        "express": "^4.17.2",
+        "express-fileupload": "^1.2.1",
+        "express-validator": "^6.14.0",
+        "mongoose": "^6.1.6",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.12",
+        "@types/express": "^4.17.13",
+        "@types/express-fileupload": "^1.2.2",
+        "@types/node": "^17.0.10",
+        "@types/uuid": "^8.3.4",
+        "nodemon": "^2.0.15",
+        "prettier": "^2.5.1",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.5.5"
+    }
 }

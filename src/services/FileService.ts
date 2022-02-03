@@ -20,8 +20,7 @@ class FileService {
             if (Array.isArray(file)) {
                 file = file[0];
             }
-            const fileName =
-                uuid.v4() + (fileExtension[file.mimetype] || ".jpg");
+            const fileName = uuid.v4() + (fileExtension[file.mimetype] || ".jpg");
             const filePath = path.resolve(`static/${entityName}`, fileName);
             file.mv(filePath);
             return fileName;

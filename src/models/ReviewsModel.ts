@@ -1,5 +1,11 @@
-import { Schema, model } from "mongoose";
-import { IReview } from "../interfaces";
+import { Schema, model, Document } from "mongoose";
+
+interface IReview extends Document {
+    author: string;
+    description: string;
+    image: string;
+    source: string;
+}
 
 const ReviewsModel = new Schema<IReview>(
     {

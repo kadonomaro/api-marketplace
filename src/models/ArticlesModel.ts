@@ -1,5 +1,11 @@
-import { Schema, model } from "mongoose";
-import { IArticle } from "../interfaces";
+import { Schema, model, Document } from "mongoose";
+
+interface IArticle extends Document {
+    title: string;
+    description?: string;
+    image: string;
+    source?: string;
+}
 
 const ArticlesModel = new Schema<IArticle>(
     {

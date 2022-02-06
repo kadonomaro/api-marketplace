@@ -1,5 +1,12 @@
-import { Schema, model } from "mongoose";
-import { IProduct } from "../interfaces";
+import { Schema, model, Document } from "mongoose";
+
+interface IProduct extends Document {
+    name: string;
+    shortName?: string;
+    price: number;
+    discountPrice?: number;
+    image: string;
+}
 
 const ProductsModel = new Schema<IProduct>(
     {

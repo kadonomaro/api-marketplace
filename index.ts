@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import { connect } from "mongoose";
 import fileUpload from "express-fileupload";
@@ -6,9 +6,9 @@ import dotenv from "dotenv";
 dotenv.config();
 import { router } from "./src/routes";
 
-const PORT = process.env.PORT || 8000;
-const app = express();
-const URL = process.env.DB_URL || "";
+const PORT: string | number = process.env.PORT || 8000;
+const app: Application = express();
+const URL: string = process.env.DB_URL || "";
 
 app.use(cors());
 app.use(express.json());

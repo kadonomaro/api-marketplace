@@ -1,5 +1,16 @@
-import { Schema, model } from "mongoose";
-import { IPage, IPageSeo } from "../interfaces";
+import { Schema, model, Document } from "mongoose";
+
+interface IPageSeo extends Document {
+    title: string;
+    description?: string;
+}
+
+interface IPage extends Document {
+    slug: string;
+    seo: IPageSeo;
+    title?: string;
+    content?: string;
+}
 
 const SEOSchema = new Schema<IPageSeo>({
     title: { type: String, required: true },

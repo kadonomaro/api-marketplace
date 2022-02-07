@@ -5,7 +5,7 @@ interface IPageSeo extends Document {
     description?: string;
 }
 
-interface IPage extends Document {
+export interface IPage extends Document {
     slug: string;
     seo: IPageSeo;
     title?: string;

@@ -1,5 +1,4 @@
-import PagesModel from "../models/PagesModel";
-import { IPage } from "../interfaces";
+import PagesModel, { IPage } from "../models/PagesModel";
 
 class PagesService {
     /**

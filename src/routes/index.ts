@@ -9,6 +9,6 @@ const router = Router();
 router.use("/articles", articlesRouter);
 router.use("/pages", pagesRouter);
 router.use("/products", productsRouter);
-router.use("/pages", reviewsRouter);
+router.use("/reviews", reviewsRouter);
 
 export { router };

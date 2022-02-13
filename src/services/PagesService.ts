@@ -1,4 +1,5 @@
 import PagesModel, { IPage } from "../models/PagesModel";
+import pagesModel from "../models/PagesModel";
 
 class PagesService {
     /**
@@ -8,6 +9,14 @@ class PagesService {
      */
     async create(page: object): Promise<IPage> {
         return await PagesModel.create(page);
+    }
+
+    /**
+     * Get all pages from database
+     * @return {Promise<*>}
+     */
+    async getAll() {
+        return await pagesModel.find();
     }
 
     /**

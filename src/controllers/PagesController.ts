@@ -1,11 +1,27 @@
 import { Request, Response } from "express";
 import PagesService from "../services/PagesService";
+import pagesService from "../services/PagesService";
 
 class PagesController {
     async create(req: Request, res: Response) {
         try {
             const page = await PagesService.create(req.body);
             res.json(page);
+        } catch (e) {
+            res.status(500).json(e);
+        }
+    }
+
+    /**
+     * Get all entities from service
+     * @param { Request } req
+     * @param { Response } res
+     * @return {Promise<*>}
+     */
+    async getAll(req: Request, res: Response) {
+        try {
+            const pages = await pagesService.getAll();
+            return res.json(pages);
         } catch (e) {
             res.status(500).json(e);
         }

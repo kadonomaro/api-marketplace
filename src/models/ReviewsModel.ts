@@ -1,6 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 
 interface IReview extends Document {
+    name: string;
     author: string;
     description: string;
     image: string;
@@ -10,6 +11,7 @@ interface IReview extends Document {
 
 const ReviewsModel = new Schema<IReview>(
     {
+        name: { type: String, required: true },
         author: { type: String, required: true },
         description: { type: String, required: true },
         image: { type: String, required: true },

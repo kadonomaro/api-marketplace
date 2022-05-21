@@ -1,15 +1,16 @@
 import { Schema, model, Document } from "mongoose";
 
-interface IPageSeo extends Document {
-    title: string;
-    description?: string;
-}
-
 export interface IPage extends Document {
     slug: string;
     seo: IPageSeo;
-    title?: string;
+    name?: string;
     content?: string;
+    isActive: boolean;
+}
+
+interface IPageSeo extends Document {
+    title: string;
+    description?: string;
 }
 
 const SEOSchema = new Schema<IPageSeo>({
@@ -21,8 +22,9 @@ const PagesModel = new Schema<IPage>(
     {
         slug: { type: String, required: true, unique: true },
         seo: { type: SEOSchema, required: true },
-        title: { type: String },
+        name: { type: String },
         content: { type: String },
+        isActive: { type: Boolean, default: true },
     },
     { timestamps: true }
 );

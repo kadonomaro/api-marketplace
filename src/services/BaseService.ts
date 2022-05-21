@@ -17,8 +17,11 @@ export default class BaseService {
      * @param { Object } image
      * @return {Promise<*>}
      */
-    async create(entity: object, image: UploadedFile | UploadedFile[]) {
-        const imageName = FileService.save(image, this.entityName);
+    async create(entity: object, image: UploadedFile | UploadedFile[]): Promise<HydratedDocument<any>> {
+        let imageName;
+        if (image) {
+            imageName = FileService.save(image, this.entityName);
+        }
         return await this.model.create({ ...entity, image: imageName });
     }
 
@@ -26,7 +29,7 @@ export default class BaseService {
      * Get all entities from database
      * @return {Promise<*>}
      */
-    async getAll() {
+    async getAll(): Promise<HydratedDocument<any>[]> {
         return await this.model.find();
     }
 
@@ -35,7 +38,7 @@ export default class BaseService {
      * @param { String, Number } id
      * @return {Promise<Query<any, any, {}, any>>}
      */
-    async getOne(id: string | number) {
+    async getOne(id: string | number): Promise<HydratedDocument<any>> {
         if (!id) {
             throw new Error(`Не указан идентификатор для [${this.entityName}]`);
         }
@@ -47,7 +50,7 @@ export default class BaseService {
      * @param { Object } entity
      * @return {Promise<*>}
      */
-    async update(entity: any) {
+    async update(entity: any): Promise<HydratedDocument<any>> {
         if (!entity._id) {
             throw new Error(`Не указан идентификатор для [${this.entityName}]`);
         }
@@ -61,7 +64,7 @@ export default class BaseService {
      * @param { String, Number } id
      * @return {Promise<awaited Query<any, any, {}, any> | Query<any, any, {}, DocType>>}
      */
-    async delete(id: string | number) {
+    async delete(id: string | number): Promise<HydratedDocument<any>> {
         if (!id) {
             throw new Error(`Не указан идентификатор для [${this.entityName}]`);
         }

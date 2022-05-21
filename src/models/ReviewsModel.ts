@@ -5,6 +5,7 @@ interface IReview extends Document {
     description: string;
     image: string;
     source: string;
+    isActive: boolean;
 }
 
 const ReviewsModel = new Schema<IReview>(
@@ -13,6 +14,7 @@ const ReviewsModel = new Schema<IReview>(
         description: { type: String, required: true },
         image: { type: String, required: true },
         source: { type: String, required: true },
+        isActive: { type: Boolean, default: true },
     },
     { timestamps: true }
 );

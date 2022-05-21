@@ -6,6 +6,7 @@ interface IProduct extends Document {
     price: number;
     discountPrice?: number;
     image: string;
+    isActive: boolean;
 }
 
 const ProductsModel = new Schema<IProduct>(
@@ -15,6 +16,7 @@ const ProductsModel = new Schema<IProduct>(
         price: { type: Number, required: true },
         discountPrice: { type: Number },
         image: { type: String, required: true },
+        isActive: { type: Boolean, default: true },
     },
     { timestamps: true }
 );

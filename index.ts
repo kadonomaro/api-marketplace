@@ -1,12 +1,11 @@
 import express, { Application } from "express";
 import cors from "cors";
 import fileUpload from "express-fileupload";
-import dotenv from "dotenv";
 import { router } from "./src/routes";
+require("dotenv").config();
 
 const PORT: string | number = process.env.PORT || 8010;
 const app: Application = express();
-dotenv.config();
 
 app.use(cors());
 app.use(express.json());

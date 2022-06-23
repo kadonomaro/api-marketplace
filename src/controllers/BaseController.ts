@@ -15,7 +15,7 @@ export default class BaseController {
      */
     async create(req: Request, res: Response) {
         try {
-            const entity = await this.service.create(req.body, req.files!.image);
+            const entity = await this.service.create(req.body);
             res.json(entity);
         } catch (e) {
             res.status(500).json(e);
@@ -30,7 +30,7 @@ export default class BaseController {
      */
     async getAll(req: Request, res: Response) {
         try {
-            const entities = await this.service.getAll({ limit: +req.params.limit });
+            const entities = await this.service.getAll();
             return res.json(entities);
         } catch (e) {
             res.status(500).json(e);

@@ -1,37 +1,39 @@
-import { HydratedDocument } from "mongoose";
-import { UploadedFile } from "express-fileupload";
-import FileService from "./FileService";
+import { doc, collection, addDoc, getDoc, getDocs, Timestamp } from "firebase/firestore";
+import { db } from "../db";
 
 export default class BaseService {
-    private model;
     private entityName;
 
-    constructor(model: HydratedDocument<any>, entityName: string) {
-        this.model = model;
+    constructor(entityName: string) {
         this.entityName = entityName;
     }
 
     /**
      * Create new entity
      * @param { Object } entity
-     * @param { Object } image
      * @return {Promise<*>}
      */
-    async create(entity: object, image: UploadedFile | UploadedFile[]): Promise<HydratedDocument<any>> {
-        let imageName;
-        if (image) {
-            imageName = FileService.save(image, this.entityName);
+    async create(entity: object): Promise<any> {
+        try {
+            const docRef = await addDoc(collection(db, this.entityName), { createdAt: Timestamp.now(), ...entity });
+            const docSnap = await getDoc(docRef);
+            return docSnap.data();
+        } catch (e) {
+            console.error("Error adding document: ", e);
         }
-        return await this.model.create({ ...entity, image: imageName });
     }
 
     /**
      * Get all entities from database
-     * @param { Object } query
      * @return {Promise<*>}
      */
-    async getAll(query = { limit: 100 }): Promise<HydratedDocument<any>[]> {
-        return await this.model.find().limit(query.limit);
+    async getAll() {
+        const querySnapshot = await getDocs(collection(db, this.entityName));
+        const response: any = [];
+        querySnapshot.forEach((doc) => {
+            response.push(doc.data());
+        });
+        return response;
     }
 
     /**
@@ -39,11 +41,14 @@ export default class BaseService {
      * @param { String, Number } id
      * @return {Promise<Query<any, any, {}, any>>}
      */
-    async getOne(id: string | number): Promise<HydratedDocument<any>> {
-        if (!id) {
-            throw new Error(`Не указан идентификатор для [${this.entityName}]`);
+    async getOne(id: string): Promise<any> {
+        const docRef = doc(db, this.entityName, id);
+        const docSnap = await getDoc(docRef);
+
+        if (!docSnap.exists()) {
+            return { error: true, message: "Document not found" };
         }
-        return await this.model.findById(id);
+        return docSnap.data();
     }
 
     /**
@@ -51,13 +56,10 @@ export default class BaseService {
      * @param { Object } entity
      * @return {Promise<*>}
      */
-    async update(entity: any): Promise<HydratedDocument<any>> {
+    async update(entity: any): Promise<any> {
         if (!entity._id) {
             throw new Error(`Не указан идентификатор для [${this.entityName}]`);
         }
-        return await this.model.findByIdAndUpdate(entity._id, entity, {
-            new: true,
-        });
     }
 
     /**
@@ -65,12 +67,9 @@ export default class BaseService {
      * @param { String, Number } id
      * @return {Promise<awaited Query<any, any, {}, any> | Query<any, any, {}, DocType>>}
      */
-    async delete(id: string | number): Promise<HydratedDocument<any>> {
+    async delete(id: string | number): Promise<any> {
         if (!id) {
             throw new Error(`Не указан идентификатор для [${this.entityName}]`);
         }
-        const model = await this.model.findByIdAndDelete(id);
-        FileService.remove(model.image, this.entityName);
-        return model;
     }
 }

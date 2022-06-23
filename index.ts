@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import { router } from "./src/routes";
 
-const PORT: string | number = process.env.PORT || 8000;
+const PORT: string | number = process.env.PORT || 8010;
 const app: Application = express();
 const URL: string = process.env.DB_URL || "";
 

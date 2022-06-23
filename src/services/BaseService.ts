@@ -27,10 +27,11 @@ export default class BaseService {
 
     /**
      * Get all entities from database
+     * @param { Object } query
      * @return {Promise<*>}
      */
-    async getAll(): Promise<HydratedDocument<any>[]> {
-        return await this.model.find();
+    async getAll(query = { limit: 100 }): Promise<HydratedDocument<any>[]> {
+        return await this.model.find().limit(query.limit);
     }
 
     /**

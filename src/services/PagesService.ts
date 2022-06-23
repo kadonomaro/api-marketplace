@@ -13,10 +13,11 @@ class PagesService {
 
     /**
      * Get all pages from database
+     * @param { Object } query
      * @return {Promise<*>}
      */
-    async getAll() {
-        return await pagesModel.find();
+    async getAll(query = { limit: 100 }) {
+        return await pagesModel.find().limit(query.limit);
     }
 
     /**

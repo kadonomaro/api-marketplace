@@ -30,7 +30,7 @@ export default class BaseController {
      */
     async getAll(req: Request, res: Response) {
         try {
-            const entities = await this.service.getAll();
+            const entities = await this.service.getAll({ limit: +req.params.limit });
             return res.json(entities);
         } catch (e) {
             res.status(500).json(e);

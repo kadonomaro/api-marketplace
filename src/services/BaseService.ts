@@ -1,5 +1,6 @@
-import { doc, collection, addDoc, getDoc, getDocs, Timestamp } from "firebase/firestore";
+import { doc, collection, addDoc, getDoc, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../db";
+import { getDateNow } from "../utils";
 
 export default class BaseService {
     private entityName;
@@ -15,7 +16,11 @@ export default class BaseService {
      */
     async create(entity: object): Promise<any> {
         try {
-            const docRef = await addDoc(collection(db, this.entityName), { createdAt: Timestamp.now(), ...entity });
+            const docRef = await addDoc(collection(db, this.entityName), {
+                createdAt: getDateNow(),
+                updatedAt: getDateNow(),
+                ...entity,
+            });
             const docSnap = await getDoc(docRef);
             return docSnap.data();
         } catch (e) {
@@ -27,11 +32,11 @@ export default class BaseService {
      * Get all entities from database
      * @return {Promise<*>}
      */
-    async getAll() {
+    async getAll(): Promise<any[]> {
         const querySnapshot = await getDocs(collection(db, this.entityName));
         const response: any = [];
         querySnapshot.forEach((doc) => {
-            response.push(doc.data());
+            response.push({ id: doc.id, ...doc.data() });
         });
         return response;
     }
@@ -39,37 +44,42 @@ export default class BaseService {
     /**
      * Get entity from database by id
      * @param { String, Number } id
-     * @return {Promise<Query<any, any, {}, any>>}
      */
     async getOne(id: string): Promise<any> {
         const docRef = doc(db, this.entityName, id);
         const docSnap = await getDoc(docRef);
 
         if (!docSnap.exists()) {
-            return { error: true, message: "Document not found" };
+            return { error: true, message: "Документ не найден" };
         }
-        return docSnap.data();
+        return { id: docSnap.id, ...docSnap.data() };
     }
 
     /**
      * Update entity in database
-     * @param { Object } entity
+     * @param { Object } document
      * @return {Promise<*>}
      */
-    async update(entity: any): Promise<any> {
-        if (!entity._id) {
-            throw new Error(`Не указан идентификатор для [${this.entityName}]`);
+    async update(document: any): Promise<any> {
+        if (!document.id) {
+            return { error: true, message: `Не указан идентификатор для [${this.entityName}]` };
         }
+
+        const docRef = doc(db, this.entityName, document.id);
+        await updateDoc(docRef, {
+            updatedAt: getDateNow(),
+            ...document,
+        });
     }
 
     /**
      * Delete entity from database by id
-     * @param { String, Number } id
-     * @return {Promise<awaited Query<any, any, {}, any> | Query<any, any, {}, DocType>>}
      */
-    async delete(id: string | number): Promise<any> {
+    async delete(id: string): Promise<any> {
         if (!id) {
-            throw new Error(`Не указан идентификатор для [${this.entityName}]`);
+            return { error: true, message: `Не указан идентификатор для [${this.entityName}]` };
         }
+        const docRef = doc(db, this.entityName, id);
+        await deleteDoc(docRef);
     }
 }

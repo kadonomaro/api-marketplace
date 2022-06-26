@@ -22,7 +22,7 @@ export default class BaseService {
                 ...entity,
             });
             const docSnap = await getDoc(docRef);
-            return docSnap.data();
+            return { id: docSnap.id, ...docSnap.data() };
         } catch (e) {
             console.error("Error adding document: ", e);
         }

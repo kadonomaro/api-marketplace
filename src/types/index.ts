@@ -1,10 +1,12 @@
 export interface Article {
+    id: string;
     name: string;
     text?: string;
     image: string;
     source?: string;
     isActive: boolean;
-    createdAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface Product {
@@ -14,7 +16,8 @@ export interface Product {
     discountPrice?: number;
     image: string;
     isActive: boolean;
-    createdAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface Review {
@@ -24,7 +27,8 @@ export interface Review {
     image: string;
     source: string;
     isActive: boolean;
-    createdAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface Page {
@@ -33,7 +37,8 @@ export interface Page {
     name?: string;
     content?: string;
     isActive: boolean;
-    createdAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
 
 interface PageSeo {

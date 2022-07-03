@@ -3,7 +3,7 @@ import { db } from "../db";
 import { getDateNow } from "../utils";
 
 export default class BaseService {
-    private entityName;
+    private entityName: string;
 
     constructor(entityName: string) {
         this.entityName = entityName;

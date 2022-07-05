@@ -34,7 +34,7 @@ export interface Review {
 export interface Page {
     slug: string;
     seo: PageSeo;
-    name?: string;
+    name: string;
     content?: string;
     isActive: boolean;
     createdAt: string;

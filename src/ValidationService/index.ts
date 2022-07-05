@@ -3,6 +3,11 @@ type ErrorType = {
     message: string;
 };
 
+enum ErrorMessage {
+    Empty = "Поле обязательно для заполнения",
+    Email = "Неверный формат email",
+}
+
 export class ValidationService {
     private body: any;
     private field: string;
@@ -17,7 +22,10 @@ export class ValidationService {
     }
 
     private setError({ field, message }: ErrorType): void {
-        this._errors.push({ field, message });
+        const error: ErrorType | undefined = this._errors.find((err) => err.field === field);
+        if (!error) {
+            this._errors.push({ field, message });
+        }
     }
 
     get errors(): ErrorType[] {
@@ -33,14 +41,14 @@ export class ValidationService {
         return this;
     }
 
-    isNotEmpty(message: string) {
+    isNotEmpty(message: string = ErrorMessage.Empty) {
         if (this.value.length > 0) {
             return;
         }
         this.setError({ field: this.field, message });
     }
 
-    isEmail(message: string) {
+    isEmail(message: string = ErrorMessage.Email) {
         if (this.value.match(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/gi)) {
             return;
         }
@@ -53,14 +61,3 @@ export class ValidationService {
         return this;
     }
 }
-
-const body = {
-    slug: "   abcABC ",
-    name: "  ",
-    email: "denis.afer@gmail",
-};
-
-const validationService = new ValidationService(body);
-validationService.check("name").trim().isNotEmpty("empty message");
-validationService.check("email").isEmail("Неверный email");
-console.log(validationService.errors);

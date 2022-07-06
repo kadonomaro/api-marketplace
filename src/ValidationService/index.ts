@@ -57,7 +57,7 @@ export class ValidationService {
 
     check(field: string) {
         this.field = field;
-        this.value = this.body[this.field];
+        this.value = this.body[this.field] || "";
         return this;
     }
 }

@@ -10,7 +10,7 @@ const validate = (fields: string[]): any => {
             validationService.check(field).trim().isNotEmpty();
         });
         if (validationService.errors.length > 0) {
-            return res.status(200).json({ success: false, errors: validationService.errors });
+            return res.status(500).json({ success: false, errors: validationService.errors });
         }
         next();
     };

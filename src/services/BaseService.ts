@@ -1,5 +1,5 @@
 import { doc, collection, addDoc, getDoc, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
-import { db } from "../db";
+import { db } from "../providers";
 import { getDateNow } from "../utils";
 
 export default class BaseService {

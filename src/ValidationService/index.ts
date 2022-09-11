@@ -6,6 +6,7 @@ type ErrorType = {
 enum ErrorMessage {
     Empty = "Поле обязательно для заполнения",
     Email = "Неверный формат email",
+    Length = "Слишком короткий пароль",
 }
 
 export class ValidationService {
@@ -42,14 +43,21 @@ export class ValidationService {
     }
 
     isNotEmpty(message: string = ErrorMessage.Empty) {
-        if (this.value.length > 0) {
+        if (this.value.length < 1) {
+            this.setError({ field: this.field, message });
+        }
+        return this;
+    }
+
+    isEmail(message: string = ErrorMessage.Email) {
+        if (this.value.match(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/gi)) {
             return;
         }
         this.setError({ field: this.field, message });
     }
 
-    isEmail(message: string = ErrorMessage.Email) {
-        if (this.value.match(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/gi)) {
+    minLength(message: string = ErrorMessage.Length, length: number = 8) {
+        if (this.value.length >= length) {
             return;
         }
         this.setError({ field: this.field, message });
